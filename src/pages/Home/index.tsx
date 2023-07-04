@@ -34,7 +34,8 @@ export function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                GITHUB <FaArrowUpRightFromSquare />
+                GITHUB
+                <FaArrowUpRightFromSquare />
               </a>
             </TitleContainer>
             <Description>
@@ -72,6 +73,9 @@ export function Home() {
           </form>
 
           <PostListContainer>
+            <PostCard />
+            <PostCard />
+            <PostCard />
             <PostCard />
             <PostCard />
             <PostCard />

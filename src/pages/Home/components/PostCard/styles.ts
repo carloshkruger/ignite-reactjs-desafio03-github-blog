@@ -5,7 +5,9 @@ export const PostContainer = styled.div`
   flex-direction: column;
   border-radius: 10px;
   background: ${(props) => props.theme['base-post']};
+  border: 2px solid ${(props) => props.theme['base-post']};
   padding: 2rem;
+  cursor: pointer;
 
   div:first-child {
     display: flex;
@@ -31,6 +33,10 @@ export const PostContainer = styled.div`
       line-height: 160%;
     }
   }
+
+  &:hover {
+    border: 2px solid ${(props) => props.theme['base-label']};
+  }
 `
 
 export const Content = styled.div`
@@ -44,7 +50,6 @@ export const Content = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 160%;
-  line-clamp: 2;
 
   p {
     overflow: hidden;

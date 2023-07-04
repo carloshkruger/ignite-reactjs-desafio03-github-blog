@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const Container = styled.main`
   width: 100%;
-  max-width: 54rem;
+  max-width: 56rem;
   margin: 0 auto;
+  padding: 0 1rem;
 `
 
 export const ProfileContainer = styled.div`
@@ -39,6 +40,9 @@ export const TitleContainer = styled.div`
   }
 
   a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: ${(props) => props.theme.blue};
     text-decoration: none;
     font-size: 0.75rem;
@@ -47,10 +51,15 @@ export const TitleContainer = styled.div`
     font-weight: 700;
     line-height: 160%;
     text-transform: uppercase;
+    border-bottom: 1px solid ${(props) => props.theme['base-background']};
 
     svg {
       width: 0.75rem;
       height: 0.75rem;
+    }
+
+    &:hover {
+      border-bottom: 1px solid ${(props) => props.theme.blue};
     }
   }
 `
@@ -93,7 +102,7 @@ export const Details = styled.div`
 export const PostsContainer = styled.div`
   margin-top: 4.5rem;
 
-  div:first-child {
+  & > div:first-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
