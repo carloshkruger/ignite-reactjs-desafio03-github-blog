@@ -19,6 +19,10 @@ export const ProfileContainer = styled.div`
   flex-direction: row;
   gap: 2rem;
 
+  & > div {
+    flex: 1;
+  }
+
   img {
     border-radius: 8px;
     max-width: 9.25rem;

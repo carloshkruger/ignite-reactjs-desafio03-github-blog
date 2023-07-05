@@ -6,7 +6,7 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/post-detail" element={<PostDetail />} />
+      <Route path="/post-detail/:id" element={<PostDetail />} />
     </Routes>
   )
 }

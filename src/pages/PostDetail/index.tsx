@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import {
   FaArrowUpRightFromSquare,
   FaCalendarDay,
@@ -5,16 +7,36 @@ import {
   FaComment,
   FaGithub,
 } from 'react-icons/fa6'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { Header } from '../../components/Header'
+import { Post } from '../Home/components/PostCard'
+import { REPO_ISSUES_URL, api } from '../../lib/api'
+import { formatDistanceFromNow } from '../../utils/dateFormatter'
 import {
   ActionsContainer,
   Container,
   ContentContainer,
   Details,
 } from './styles'
-import { Link } from 'react-router-dom'
 
 export function PostDetail() {
+  const { id } = useParams()
+  const [post, setPost] = useState<Post | null>(null)
+
+  useEffect(() => {
+    api
+      .get(`${REPO_ISSUES_URL}/${id}`)
+      .then((response) => setPost(response.data))
+  }, [id])
+
+  if (!post) {
+    return <></>
+  }
+
+  const publishedDateRelativeToNow = formatDistanceFromNow(
+    new Date(post.created_at),
+  )
+
   return (
     <>
       <Header />
@@ -25,46 +47,34 @@ export function PostDetail() {
               <FaChevronLeft />
               Voltar
             </Link>
-            <a
-              href="https://github.com/carloshkruger"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={post.html_url} target="_blank" rel="noreferrer">
               Ver no GitHub
               <FaArrowUpRightFromSquare />
             </a>
           </ActionsContainer>
 
-          <h1>JavaScript data types and data structures</h1>
+          <h1>{post.title}</h1>
 
           <Details>
             <div>
               <FaGithub />
-              <span>carloshkruger</span>
+              <span>{post.user.login}</span>
             </div>
 
             <div>
               <FaCalendarDay />
-              <span>Há 1 dia</span>
+              <span>{publishedDateRelativeToNow}</span>
             </div>
 
             <div>
               <FaComment />
-              <span>5 comentários</span>
+              <span>{post.comments} comentários</span>
             </div>
           </Details>
 
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types:
-          </p>
+          <div>
+            <ReactMarkdown>{post.body}</ReactMarkdown>
+          </div>
         </ContentContainer>
       </Container>
     </>

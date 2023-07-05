@@ -15,7 +15,7 @@ export const ContentContainer = styled.div`
   position: relative;
   padding: 2rem 2.5rem;
 
-  h1 {
+  & > h1 {
     margin-top: 1.25rem;
     color: ${(props) => props.theme['base-title']};
     font-size: 1.5rem;
@@ -25,7 +25,7 @@ export const ContentContainer = styled.div`
     line-height: 130%;
   }
 
-  p {
+  & > div {
     margin-top: 4.5rem;
     color: ${(props) => props.theme['base-text']};
     font-size: 1rem;
